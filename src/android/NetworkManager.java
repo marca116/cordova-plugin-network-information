@@ -36,6 +36,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import java.util.Locale;
+import android.os.Handler;
 
 public class NetworkManager extends CordovaPlugin {
 
@@ -78,6 +79,7 @@ public class NetworkManager extends CordovaPlugin {
     public static final String TYPE_3G = "3g";
     public static final String TYPE_4G = "4g";
     public static final String TYPE_NONE = "none";
+    public static final Integer CONNECTION_CHECK_INTERVAL = 5000;
 
     private static final String LOG_TAG = "NetworkManager";
 
@@ -114,6 +116,15 @@ public class NetworkManager extends CordovaPlugin {
             webView.getContext().registerReceiver(this.receiver, intentFilter);
         }
 
+        Handler handler = new Handler();
+        Runnable runnable = new Runnable(){
+            public void run() {
+                NetworkInfo info = sockMan.getActiveNetworkInfo();
+                updateConnectionInfo(info);
+                handler.postDelayed(this, CONNECTION_CHECK_INTERVAL);
+            }
+        };
+        handler.postDelayed(runnable, CONNECTION_CHECK_INTERVAL);
     }
 
     /**

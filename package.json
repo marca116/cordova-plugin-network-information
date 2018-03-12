@@ -1,10 +1,10 @@
 {
-  "name": "cordova-plugin-network-information",
-  "version": "2.0.2-dev",
+  "name": "cordova-plugin-network-information-with-connection-update",
+  "version": "2.0.2",
   "description": "Cordova Network Information Plugin",
   "types": "./types/index.d.ts",
   "cordova": {
-    "id": "cordova-plugin-network-information",
+    "id": "cordova-plugin-network-information-with-connection-update",
     "platforms": [
       "android",
       "ios",
